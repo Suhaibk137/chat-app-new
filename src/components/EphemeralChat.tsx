@@ -181,14 +181,14 @@ const EphemeralChat = () => {
 
   const playAudio = (audioData: string, messageId: string) => {
     if (playingAudio === messageId) {
-      const audioElements = document.getElementsByTagName('audio');
-      for (let audio of audioElements) {
+      const audioElements: HTMLCollectionOf<HTMLAudioElement> = document.getElementsByTagName('audio');
+      for (const audio of audioElements) {
         audio.pause();
         audio.currentTime = 0;
       }
       setPlayingAudio(null);
     } else {
-      const audio = new Audio(audioData);
+      const audio: HTMLAudioElement = new Audio(audioData);
       audio.onended = () => setPlayingAudio(null);
       audio.play();
       setPlayingAudio(messageId);
